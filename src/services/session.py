@@ -12,22 +12,15 @@ class SessionService:
     DOMEN3 = "https://zakupki.mos.ru/newapi/api/FileStorage/Download?id="
 
     def __init__(self, link, options: Parameters = Parameters()):
-        # self.id = SessionService.__get_session_id(link)
         self.id = link
         self.options = options
         self.session_data = self.get_session_data()
         self.files = self.__get_files()
 
-    # @staticmethod
-    # def __get_session_id(link):
-    #     return link.split("/")[-1]
-
     def __get_files(self):
         return self.session_data["files"]
 
     def check_files(self):
-        # if len(self.files) == 1:
-        #     return self.files[0]
         docx_file = {}
         for file in self.files:
             if "docx" in file["name"].lower():
@@ -77,7 +70,7 @@ class SessionService:
                 if attr1 == attr2:
                     # Полное соответствие, чекаем дальше
                     result[option] = "Полное соответствие"
-                    print("Всё гуд")
+                    print("Полное соответствие")
                     continue
 
                 # print(attr1)
@@ -105,7 +98,6 @@ class SessionService:
         return result
 
     def checkout(self):
-        # checkout_result = {}
         file = self.check_files()
         if not file:
             checkout_result = {"title": "Нет документов"}
@@ -114,11 +106,9 @@ class SessionService:
         filepath = f"../media/{file['name']}"
         with open(filepath, "wb") as f:
             f.write(a.content)
-        # if "docx" in file["name"]:
+
         file_data = WordExtractor(filepath, self.options).parse()
-        # else:
-        #     file_data = PdfExtractor(filepath, self.options).parse()
-        # pdf_data = PdfExtractor(self.id).parse()
+
         os.remove(filepath)
         checkout_result = self.analise(self.get_data(), self.options, file_data)
         return checkout_result

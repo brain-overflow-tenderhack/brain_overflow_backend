@@ -2,7 +2,6 @@ from fastapi import APIRouter
 
 from src.utils import Parameters
 from src.services import SessionService
-import re
 
 router = APIRouter(prefix="/quoters", tags=["quoters"])
 
