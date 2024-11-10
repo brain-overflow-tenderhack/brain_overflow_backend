@@ -84,8 +84,8 @@ class SessionService:
 
                 avg = (a + b + c + d) // 4
                 if b < 80 and avg < 60:
-                    print(f"Не соответствие по полю {option}")
-                    result[option] = "Не соответствие по полю"
+                    print(f"Несоответствие по полю {option}")
+                    result[option] = "Несоответствие по полю"
                 else:
                     print(f"Неполное соответствие поля {option}, процент соотношения - {b} %")
                     result[option] = f"Неполное соответствие поля, процент соотношения - {b} %"
