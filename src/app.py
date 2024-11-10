@@ -12,12 +12,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(quotes_router)
+app.include_router(session_router)
 
 
-@app.on_event("startup")
-async def startup(): ...
-
-
-@app.on_event("shutdown")
-async def shutdown(): ...
+# @app.on_event("startup")
+# async def startup(): ...
+#
+#
+# @app.on_event("shutdown")
+# async def shutdown(): ...
